@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-// Bas-URL till ditt API — ändra denna när du deployar till Azure
+// Bas-URL till ditt API — Azure App Service backend
 const api = axios.create({
-  baseURL: 'https://localhost:7001/api',
+  baseURL: 'https://tradingjournal-api-knightdotcom-gud0ergsg6e4f4hq.westeurope-01.azurewebsites.net/api',
 });
 
 // Interceptor = kod som körs automatiskt innan VARJE request

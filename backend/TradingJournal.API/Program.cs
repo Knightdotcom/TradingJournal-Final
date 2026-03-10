@@ -90,11 +90,16 @@ builder.Services.Configure<Microsoft.AspNetCore.Http.Features.FormOptions>(optio
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+// Kör EF-migrationer automatiskt vid start (fungerar mot Azure SQL)
+using (var scope = app.Services.CreateScope())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.Migrate();
 }
+
+// Swagger tillgängligt i alla miljöer (behövs för felsökning i prod)
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseCors();
 app.UseStaticFiles(); // Krävs för screenshot-servering från wwwroot/screenshots/

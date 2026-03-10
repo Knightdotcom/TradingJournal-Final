@@ -36,11 +36,16 @@ function PrivateRoute({ children }) {
 
 function AppLayout({ children }) {
   return (
-    <div style={{ minHeight: '100vh', background: '#0f172a', color: '#fff' }}>
+    <div style={{ display: 'flex', minHeight: '100vh', background: '#080d18' }}>
+      {/* Fast sidebar till vänster */}
       <Navbar />
-      <RiskAlert />
-      <div style={{ padding: '1.5rem 2rem', maxWidth: '1200px', margin: '0 auto' }}>
-        {children}
+
+      {/* Huvudinnehåll — förskjutet 240px för sidebaren */}
+      <div style={{ marginLeft: '240px', flex: 1, display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+        <RiskAlert />
+        <main style={{ flex: 1, padding: '2.5rem 3rem', color: '#f9fafb' }}>
+          {children}
+        </main>
       </div>
     </div>
   );
